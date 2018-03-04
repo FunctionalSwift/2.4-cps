@@ -12,10 +12,23 @@ class Model {
 
 let model = Model()
 
-model.count { count in
-    if count == 0 {
-        //no data
-    } else {
-        //we have data
+func isEmpty(model: Model, onTrue: @escaping () -> Void, onFalse: @escaping (Int) -> Void) {
+    model.count { count in
+        if count == 0 {
+            onTrue()
+        } else {
+            onFalse(count)
+        }
     }
 }
+
+
+isEmpty(model: model,
+        onTrue: {
+            //no data
+        },
+        onFalse: { count in
+            //we have data
+        }
+)
+
